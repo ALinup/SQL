@@ -1,0 +1,46 @@
+1、定义变量：
+定义语法：declare @变量名
+例子：declare @num int;
+
+赋值语法：set @变量名 = 值 或者select @变量名 = 值
+例子：set @num = 10;
+
+备注：set只允许单值处理，select可以多值
+
+2、流程控制
+控制选择：
+if (条件)
+begin
+（sql语句）
+end     
+else  
+begin
+（sql语句）       
+end
+例子：
+if (@avg>=95)
+begin
+print '成绩不错。输出前三名'
+select top 3 * from Result where SubjectId=@subjectId
+and StudentResult is not null order by StudentResult desc
+end
+else
+begin
+print '成绩不好。输出后三名'
+select top 3 * from Result where SubjectId=@subjectId
+and StudentResult is not null order by StudentResult
+end
+
+控制选择：
+while（条件）
+begin    
+（sql语句）
+end
+例子：
+declare @i int
+set @i=1
+while @i<=10000000
+begin
+insert into dbo.Persons (Age,Sex,Grade,Name) values(cast( floor(rand()*100) as int),'男','2','张三')
+set @i=@i+1
+end
